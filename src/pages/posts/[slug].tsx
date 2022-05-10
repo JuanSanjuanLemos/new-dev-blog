@@ -1,7 +1,17 @@
 import { GetStaticProps } from "next";
+import Image from "next/image";
 import { RichText } from "prismic-dom";
-import { Header } from "../../components/Header";
 import getPrismicClient from "../../services/prismic";
+
+import { AiOutlineCalendar } from "react-icons/ai";
+import { BsFillPersonFill } from "react-icons/bs";
+import { MdOutlineWatchLater } from "react-icons/md";
+
+import { Header } from "../../components/Header";
+import { BoxBanner, Container } from "../../components/Post/styles";
+import { Client } from "@prismicio/client";
+import Link from "next/link";
+import { NavPost } from "../../components/NavPost";
 
 interface PostPreviewProps {
   post: {
@@ -15,45 +25,113 @@ interface PostPreviewProps {
         text: string;
       }[];
     }[];
+    bannerUrl: {
+      url: string;
+    };
     updatedAt: string;
+    author: string;
   };
+  nextPost: {
+    uid: string;
+    data: {
+      title: {
+        text: string;
+      }[];
+    };
+  };
+  prevPost: {
+    uid: string;
+    data: {
+      title: {
+        text: string;
+      }[];
+    };
+  };
+  timeReading: number;
 }
 
-export default function Post({ post }: PostPreviewProps) {
+interface Item {
+  body: {
+    text: string;
+  }[];
+  heading: {
+    text: string;
+  }[];
+}
+
+export default function Post({
+  post,
+  timeReading,
+  prevPost,
+  nextPost,
+}: PostPreviewProps) {
   return (
     <>
       <Header />
-      <main>
-        <article>
-          <h1>{post.title}</h1>
-          <time>{post.updatedAt}</time>
-          <div>
-            {post.content.map((item) => (
-              <section key={item.heading[0].text}>
-                <h2>{item.heading[0].text}</h2>
-                <article
-                  dangerouslySetInnerHTML={{
-                    __html: RichText.asHtml(item.body),
-                  }}
-                />
-              </section>
-            ))}
+      <div className="wrapper-page">
+        {post.bannerUrl.url && (
+          <BoxBanner>
+            <Image src={`${post.bannerUrl.url}`} layout="fill" />
+          </BoxBanner>
+        )}
+        <Container className="box">
+          <article className="content">
+            <h1>{post.title}</h1>
+            <h3 className="about-post">
+              <span>
+                <AiOutlineCalendar />
+              </span>
+              {post.updatedAt}
+            </h3>
+            <h3 className="about-post">
+              <span>
+                <BsFillPersonFill />
+              </span>
+              {post.author}
+            </h3>
+            <h3 className="about-post">
+              <span>
+                <MdOutlineWatchLater />
+              </span>
+              {timeReading} minutos
+            </h3>
+            <div className="content-post">
+              {post.content.map((item) => (
+                <section key={item.heading[0].text}>
+                  <h2>{item.heading[0].text}</h2>
+                  <article
+                    dangerouslySetInnerHTML={{
+                      __html: RichText.asHtml(item.body),
+                    }}
+                  />
+                </section>
+              ))}
+            </div>
+          </article>
+          <div className="wrapper-nav-posts">
+            {prevPost && (
+              <NavPost title={prevPost.data.title[0].text} link={prevPost.uid} typePost="Post anterior" />
+            )}
+            {nextPost && (
+              <NavPost title={prevPost.data.title[0].text} link={nextPost.uid} typePost="Próximo post" variant="next" />
+            )}
           </div>
-        </article>
-      </main>
+        </Container>
+      </div>
     </>
   );
 }
 
 export const getStaticPaths = () => {
   return {
-    paths: [] as unknown,
+    paths: [],
     fallback: "blocking",
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params!;
+  let lengthText = 0;
 
   const prismic = getPrismicClient();
 
@@ -63,7 +141,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     slug,
     title: RichText.asText(response.data.title),
     content: response.data.content,
-    updatedAt: new Date(response.last_publication_date).toLocaleDateString(
+    bannerUrl: response.data.banner,
+    author: RichText.asText(response.data.author),
+    updatedAt: new Date(response.first_publication_date).toLocaleDateString(
       "pt-BR",
       {
         day: "2-digit",
@@ -72,8 +152,44 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       }
     ),
   };
+
+  const nextPost = (
+    await prismic.get({
+      fetch: ["post.title"],
+      pageSize: 1,
+      orderings: ["document.first_publication_date desc"],
+      after: response.id,
+    })
+  ).results[0];
+
+  const prevPost = (
+    await prismic.get({
+      fetch: ["post.title"],
+      pageSize: 1,
+      orderings: ["document.first_publication_date"],
+      after: response.id,
+    })
+  ).results[0];
+
+  post.content.map((item: Item) => {
+    item.body.map((p) => {
+      lengthText += p.text.split(" ").length;
+    });
+    item.heading.map((p) => {
+      lengthText += p.text.split(" ").length;
+    });
+  });
+
+  const timeReading = (lengthText / 200).toFixed(0);
+
+  console.log(prevPost);
   return {
-    props: { post },
+    props: {
+      post,
+      timeReading,
+      prevPost: prevPost || null,
+      nextPost: nextPost || null,
+    },
     revalidate: 60 * 60 * 24, //24 hours
   };
 };

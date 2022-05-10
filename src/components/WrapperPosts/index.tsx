@@ -1,10 +1,6 @@
 import { Container } from "./style";
 
-import { GetStaticProps } from "next";
-import * as prismic from "@prismicio/client";
-import { RichText } from "prismic-dom";
 
-import getPrismicClient from "../../services/prismic";
 import { SmallPost } from "../../components/SmallPost";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { BsFillPersonFill } from "react-icons/bs";

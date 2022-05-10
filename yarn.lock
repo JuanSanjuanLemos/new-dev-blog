@@ -1099,7 +1099,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
 
-"@prismicio/client@^6.0.0":
+"@prismicio/client@^6.0.0", "@prismicio/client@^6.4.3":
   "integrity" "sha512-UrOMeXc4upAqBgE0MRuw/S//NTaOi6LWTb7OmTUEyWaOVURILcMLKbcL879futl7pPfx1KI7t+cyQWnH0irCHA=="
   "resolved" "https://registry.npmjs.org/@prismicio/client/-/client-6.4.3.tgz"
   "version" "6.4.3"
