@@ -17,5 +17,6 @@ export const Box = styled.div`
   }
   &.-next{
     text-align: right;
+    margin-left: auto;
   }
 `;

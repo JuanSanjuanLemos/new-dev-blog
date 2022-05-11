@@ -9,9 +9,8 @@ import { MdOutlineWatchLater } from "react-icons/md";
 
 import { Header } from "../../components/Header";
 import { BoxBanner, Container } from "../../components/Post/styles";
-import { Client } from "@prismicio/client";
-import Link from "next/link";
 import { NavPost } from "../../components/NavPost";
+import { useUtterances } from "../../hooks/useUterrances";
 
 interface PostPreviewProps {
   post: {
@@ -65,6 +64,8 @@ export default function Post({
   prevPost,
   nextPost,
 }: PostPreviewProps) {
+  const commentNodeId = 'comments';
+  useUtterances(commentNodeId)
   return (
     <>
       <Header />
@@ -113,10 +114,11 @@ export default function Post({
               <NavPost title={prevPost.data.title[0].text} link={prevPost.uid} typePost="Post anterior" />
             )}
             {nextPost && (
-              <NavPost title={prevPost.data.title[0].text} link={nextPost.uid} typePost="Próximo post" variant="next" />
+              <NavPost title={nextPost.data.title[0].text} link={nextPost.uid} typePost="Próximo post" variant="next" />
             )}
           </div>
         </Container>
+        <div id={commentNodeId} />
       </div>
     </>
   );
@@ -182,7 +184,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const timeReading = (lengthText / 200).toFixed(0);
 
-  console.log(prevPost);
   return {
     props: {
       post,
