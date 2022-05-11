@@ -11,6 +11,7 @@ import { Header } from "../../components/Header";
 import { BoxBanner, Container } from "../../components/Post/styles";
 import { NavPost } from "../../components/NavPost";
 import { useUtterances } from "../../hooks/useUterrances";
+import Head from "next/head";
 
 interface PostPreviewProps {
   post: {
@@ -64,20 +65,19 @@ export default function Post({
   prevPost,
   nextPost,
 }: PostPreviewProps) {
-  const commentNodeId = 'comments';
-  useUtterances(commentNodeId)
+  const commentNodeId = "comments";
+  useUtterances(commentNodeId);
   return (
     <>
-    <head>
-      <title>ND | {post.title}</title>
-    </head>
+      <Head>
+        <title>ND | {post.title}</title>
+      </Head>
       <Header />
       <div className="wrapper-page">
-        {post.bannerUrl.url && (
-          <BoxBanner>
-            <Image src={`${post.bannerUrl.url}`} layout="fill" />
-          </BoxBanner>
-        )}
+        <BoxBanner>
+          <Image src={`${post.bannerUrl.url}`} layout="fill" />
+        </BoxBanner>
+
         <Container className="box">
           <article className="content">
             <h1>{post.title}</h1>
@@ -114,10 +114,19 @@ export default function Post({
           </article>
           <div className="wrapper-nav-posts">
             {prevPost && (
-              <NavPost title={prevPost.data.title[0].text} link={prevPost.uid} typePost="Post anterior" />
+              <NavPost
+                title={prevPost.data.title[0].text}
+                link={prevPost.uid}
+                typePost="Post anterior"
+              />
             )}
             {nextPost && (
-              <NavPost title={nextPost.data.title[0].text} link={nextPost.uid} typePost="Próximo post" variant="next" />
+              <NavPost
+                title={nextPost.data.title[0].text}
+                link={nextPost.uid}
+                typePost="Próximo post"
+                variant="next"
+              />
             )}
           </div>
         </Container>

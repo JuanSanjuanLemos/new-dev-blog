@@ -8,6 +8,7 @@ import { Header } from "../components/Header";
 import { WrapperPosts } from "../components/WrapperPosts";
 import { useState } from "react";
 import { Container } from "../components/HomePage/styles";
+import { Carousel } from "../components/Carousel";
 
 type Post = {
   slug: string;
@@ -15,6 +16,7 @@ type Post = {
   subtitle: string;
   author: string;
   updatedAt: string;
+  bannerURL: string,
 };
 
 type PostRequest = {
@@ -65,6 +67,7 @@ export default function Home({ posts, next_page }: PostProps) {
       <Header />
       <Container className=".box">
         <div className="content">
+          <Carousel posts={posts} />
           <WrapperPosts posts={listPosts} />
           {nextPage && <h3 className="load-more" onClick={getMorePosts}>Carregar mais Posts</h3>}
         </div>
@@ -86,6 +89,7 @@ export const getStaticProps: GetStaticProps = async () => {
       slug: post.uid,
       title: RichText.asText(post.data.title),
       subtitle: RichText.asText(post.data.subtitle),
+      bannerURL: post.data.banner.url,
       author: RichText.asText(post.data.author),
       updatedAt: new Date(post.last_publication_date).toLocaleDateString(
         "pt-BR",
@@ -97,7 +101,9 @@ export const getStaticProps: GetStaticProps = async () => {
       ),
     };
   });
+
   const next_page = response.next_page;
+  
   return {
     props: {
       posts,
