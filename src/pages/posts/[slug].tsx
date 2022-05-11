@@ -68,6 +68,9 @@ export default function Post({
   useUtterances(commentNodeId)
   return (
     <>
+    <head>
+      <title>ND | {post.title}</title>
+    </head>
       <Header />
       <div className="wrapper-page">
         {post.bannerUrl.url && (
