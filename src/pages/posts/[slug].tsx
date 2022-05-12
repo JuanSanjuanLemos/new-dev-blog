@@ -12,6 +12,7 @@ import { BoxBanner, Container } from "../../components/Post/styles";
 import { NavPost } from "../../components/NavPost";
 import { useUtterances } from "../../hooks/useUterrances";
 import Head from "next/head";
+import { TopPage } from "../../components/TopPage";
 
 interface PostProps {
   post: {
@@ -72,7 +73,6 @@ export default function Post({
       <Head>
         <title>ND | {post.title}</title>
       </Head>
-      <Header />
       <div className="wrapper-page">
         <BoxBanner>
           <Image priority src={`${post.bannerUrl}`} layout="fill" />
@@ -129,6 +129,7 @@ export default function Post({
               />
             )}
           </div>
+
         </Container>
         <div id={commentNodeId} />
       </div>

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
-  max-width: 720px !important;
   margin: auto;
   .content {
     margin: 5rem auto;
     padding: 0 0.5rem 2.5rem;
     border-bottom: 1px solid #747474;
+    max-width: 720px;
     h1{
       font-size: 3rem;
       font-weight: 600;
@@ -52,6 +52,8 @@ export const Container = styled.main`
   .wrapper-nav-posts{
     display: flex; justify-content: space-between;
     margin-bottom: 3rem;
+    max-width: 720px;
+    margin: auto;
   }
 `;
 

@@ -22,7 +22,7 @@ interface PostProps {
 
 export function WrapperPosts({ posts }: PostProps){
   return(
-    <Container className=".box">
+    <Container className="box">
       <div className="content">
         {posts.map((post) => (
           <SmallPost key={post.slug}>

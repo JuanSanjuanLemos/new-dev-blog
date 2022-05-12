@@ -67,8 +67,7 @@ export default function Home({ posts, next_page }: PostProps) {
     <Head>
       <title>DewDevBlog</title>
     </Head>
-      <Header />
-      <Container className=".box">
+      <Container className="box">
         <div className="content">
           <Carousel posts={posts} />
           <WrapperPosts posts={listPosts} />

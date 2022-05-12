@@ -4,7 +4,7 @@ import { Content } from "./styles";
 
 export function Header(){
   return(
-    <header className=".box">
+    <header className="box">
       <Content>
         <Link href="/">
           <div className="wrapper-logo">
