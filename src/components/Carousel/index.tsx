@@ -36,7 +36,7 @@ export function Carousel({ posts }: CarouselProps) {
     slides.push(
       <SwiperSlide key={`slide-${post.slug}`} tag="li">
         <BoxImg>
-            <Image src={post.bannerURL} layout="fill" />
+            <Image priority src={`${post.bannerURL}`} layout="fill" />
           <Link href={`/posts/${post.slug}`} passHref>
             <a className="post-title">{post.title}</a>
           </Link>

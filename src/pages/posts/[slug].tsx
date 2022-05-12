@@ -13,7 +13,7 @@ import { NavPost } from "../../components/NavPost";
 import { useUtterances } from "../../hooks/useUterrances";
 import Head from "next/head";
 
-interface PostPreviewProps {
+interface PostProps {
   post: {
     slug: string;
     title: string;
@@ -64,7 +64,7 @@ export default function Post({
   timeReading,
   prevPost,
   nextPost,
-}: PostPreviewProps) {
+}: PostProps) {
   const commentNodeId = "comments";
   useUtterances(commentNodeId);
   return (
@@ -75,7 +75,7 @@ export default function Post({
       <Header />
       <div className="wrapper-page">
         <BoxBanner>
-          <Image src={`${post.bannerUrl.url}`} layout="fill" />
+          <Image priority src={`${post.bannerUrl}`} layout="fill" />
         </BoxBanner>
 
         <Container className="box">
@@ -155,7 +155,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     slug,
     title: RichText.asText(response.data.title),
     content: response.data.content,
-    bannerUrl: response.data.banner,
+    bannerUrl: response.data.banner.url,
     author: RichText.asText(response.data.author),
     updatedAt: new Date(response.first_publication_date).toLocaleDateString(
       "pt-BR",

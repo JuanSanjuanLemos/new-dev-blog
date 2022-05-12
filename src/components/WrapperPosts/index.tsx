@@ -6,16 +6,17 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import { BsFillPersonFill } from "react-icons/bs";
 import Link from "next/link";
 
-type Post = {
-  slug: string;
+interface PostsFormatted{
+  slug:string;
+  first_publication_date:string;
   title: string;
-  subtitle: string;
-  author: string;
-  updatedAt: string;
-};
+  subtitle:string;
+  author:string;
+  bannerURL:string;
+}
 
 interface PostProps {
-  posts: Post[];
+  posts: PostsFormatted[];
 }
 
 
@@ -32,7 +33,7 @@ export function WrapperPosts({ posts }: PostProps){
             <div>
               <h3>
                 <span><AiOutlineCalendar /></span>
-                {post.updatedAt}
+                {post.first_publication_date}
               </h3>
               <h3>
                 <span><BsFillPersonFill /></span>
