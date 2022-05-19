@@ -71,8 +71,8 @@ export default function Home({ posts, next_page }: PostProps) {
         <div className="text">
           <h1>New Dev Blog</h1>
           <p>
-            Um blog focando em conteúdos para devs initciantes. Meu o objetico é
-            que a cada post o júnior ou sand ler, deixe ele um passo mais proximo de alcançar seus objetivos🤓.
+            Um blog focando em conteúdos para devs iniciante. Meu o objetivo é
+            que a cada post que o júnior ou sand ler, deixe ele um passo mais próximo de alcançar seus objetivos🤓.
           </p>
         </div>
         <Image priority src="/images/banner.jpg" layout="fill" />
