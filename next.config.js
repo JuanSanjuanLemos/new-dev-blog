@@ -7,6 +7,6 @@ module.exports = nextConfig
 
 module.exports = {
   images: {
-    domains: ['images.prismic.io'],
+    domains: ['images.prismic.io','newdevblog.cdn.prismic.io'],
   },
 }

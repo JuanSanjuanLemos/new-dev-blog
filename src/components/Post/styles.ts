@@ -25,8 +25,6 @@ export const Container = styled.main`
         margin-right: 0.5rem;
       }
     }
-    
-
     &-post{
       h1,h2{
         font-size: 2.25rem;
@@ -46,6 +44,9 @@ export const Container = styled.main`
       strong{
         color: #3BCBDE;
       }
+      p img{
+        text-align: center;
+      }
     }
   }
 
@@ -59,10 +60,20 @@ export const Container = styled.main`
 
 export const BoxBanner = styled.div`
   max-width: 1440px;
+  flex: 1;
   margin: auto;
   position: relative;
   padding-bottom: 30%;
   img{
-    object-fit: contain;
+    object-fit: cover;
+  }
+`;
+
+
+export const BoxImage = styled.div`
+  position: relative;
+  margin: 2rem 0;
+  img{
+    width: 100%;
   }
 `;

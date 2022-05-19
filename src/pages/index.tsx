@@ -135,6 +135,6 @@ export const getStaticProps: GetStaticProps = async () => {
       posts,
       next_page,
     },
-    revalidate: 60 * 60 // 1hour
+    revalidate: 60 // 1 minute
   };
 };

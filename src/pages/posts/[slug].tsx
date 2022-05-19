@@ -4,15 +4,13 @@ import { RichText } from "prismic-dom";
 import getPrismicClient from "../../services/prismic";
 
 import { AiOutlineCalendar } from "react-icons/ai";
-import { BsFillPersonFill } from "react-icons/bs";
+import { BsFillPersonFill, BsTypeH1 } from "react-icons/bs";
 import { MdOutlineWatchLater } from "react-icons/md";
 
-import { Header } from "../../components/Header";
-import { BoxBanner, Container } from "../../components/Post/styles";
+import { BoxBanner, BoxImage, Container } from "../../components/Post/styles";
 import { NavPost } from "../../components/NavPost";
 import { useUtterances } from "../../hooks/useUterrances";
 import Head from "next/head";
-import { TopPage } from "../../components/TopPage";
 
 interface PostProps {
   post: {
@@ -25,6 +23,9 @@ interface PostProps {
       body: {
         text: string;
       }[];
+      image: {
+        url: string;
+      };
     }[];
     bannerUrl: {
       url: string;
@@ -75,7 +76,12 @@ export default function Post({
       </Head>
       <div className="wrapper-page">
         <BoxBanner>
-          <Image priority src={`${post.bannerUrl}`} alt='banner post' layout="fill" />
+          <Image
+            priority
+            src={`${post.bannerUrl}`}
+            alt="banner post"
+            layout="fill"
+          />
         </BoxBanner>
 
         <Container className="box">
@@ -101,14 +107,20 @@ export default function Post({
             </h3>
             <div className="content-post">
               {post.content.map((item) => (
-                <section key={item.heading[0].text}>
+                <div key={item.heading[0].text}>
                   <h2>{item.heading[0].text}</h2>
                   <article
                     dangerouslySetInnerHTML={{
                       __html: RichText.asHtml(item.body),
                     }}
                   />
-                </section>
+
+                  {item.image.url && (
+                    <BoxImage>
+                      <img src={item.image.url} alt="" />
+                    </BoxImage>
+                  )}
+                </div>
               ))}
             </div>
           </article>
@@ -187,7 +199,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   post.content.map((item: Item) => {
     item.body.map((p) => {
-      lengthText += p.text.split(" ").length;
+      if (p.text) {
+        lengthText += p.text.split(" ").length;
+      }
     });
     item.heading.map((p) => {
       lengthText += p.text.split(" ").length;
@@ -203,6 +217,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       prevPost: prevPost || null,
       nextPost: nextPost || null,
     },
-    revalidate: 60 * 60 * 24, //24 hours
+    revalidate: 60, //24 hours
   };
 };
