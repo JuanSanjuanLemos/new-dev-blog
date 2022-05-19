@@ -21,8 +21,8 @@ export const GlobalStyle = createGlobalStyle`
             font-size: 87.5%;
         }
     }
-    body{
-      background-color: #1A1D23;
+    body{   
+      background-color: #040810;
       color: #F8F8F8;
     }
     body, input, textarea, button{

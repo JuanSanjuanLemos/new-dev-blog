@@ -1,24 +1,40 @@
 import styled from "styled-components";
 
+
 export const Article = styled.article`
+  border: 2px solid #333;
+  padding: 1rem;
+  border-radius: 10px;
+
+  background-color:#21212c;
+  max-height: 320px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin: 3rem 0;
+
+  transition: transform 0.5s ease-in-out;
+  cursor: pointer;
+  &:hover{
+    transform: translateY(-7%);
+  }
+
   h1{
+    margin-top: 1rem;
     font-weight: 600;
     font-size: 1.75rem;
     line-height: 1.2;
-    cursor: pointer;
     transition: color 0.2s linear;
-    &:hover{
-      color: #3BCBDE;
-    }
   }
   h2{
     font-size: 1.125rem;
     color: #D7D7D7;
     line-height: 1.2;
+    span{
+      margin-left: 0.5rem;
+      cursor: pointer;
+      color: #3BCBDE;
+      font-size: 0.8rem;
+    }
   }
   div{
     h3{

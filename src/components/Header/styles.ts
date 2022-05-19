@@ -1,13 +1,18 @@
 import styled from "styled-components";
 
 export const Content = styled.div`
-  max-width: 1160px;
-  margin: auto;
-  padding: 2rem 0;
+  padding:2rem 0;
+  background-color: #040810;
+  border-bottom: 1px solid #747474;
   cursor: pointer;
   .wrapper-logo{
+    left: 50%;
+    transform: translateX(-50%);
     position: relative;
-    width: 10rem;
-    height: 2rem;
+    width: 15rem;
+    height: 3rem;
+    img{
+      object-fit: contain;
+    }
   }
 `;

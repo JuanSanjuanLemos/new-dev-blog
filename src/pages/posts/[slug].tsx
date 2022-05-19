@@ -129,7 +129,6 @@ export default function Post({
               />
             )}
           </div>
-
         </Container>
         <div id={commentNodeId} />
       </div>
