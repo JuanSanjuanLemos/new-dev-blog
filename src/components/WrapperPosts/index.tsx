@@ -27,7 +27,7 @@ export function WrapperPosts({ posts }: PostProps) {
           <Link key={post.slug} href={`/posts/${post.slug}`} passHref>
             <a>
               <SmallPost>
-                <Image src={`${post.bannerURL}`} height={200} width={250} />
+                <Image src={`${post.bannerURL}`} height={200} width={250} alt='post imagem' />
 
                 <h1>{post.title}</h1>
                 <h2>

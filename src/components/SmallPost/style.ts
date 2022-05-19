@@ -8,6 +8,8 @@ export const Article = styled.article`
 
   background-color:#21212c;
   max-height: 320px;
+  max-width: 400px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -23,7 +25,7 @@ export const Article = styled.article`
     font-weight: 600;
     font-size: 1.75rem;
     line-height: 1.2;
-    transition: color 0.2s linear;
+    color: #3bcbde;
   }
   h2{
     font-size: 1.125rem;

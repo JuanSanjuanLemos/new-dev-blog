@@ -75,7 +75,7 @@ export default function Post({
       </Head>
       <div className="wrapper-page">
         <BoxBanner>
-          <Image priority src={`${post.bannerUrl}`} layout="fill" />
+          <Image priority src={`${post.bannerUrl}`} alt='banner post' layout="fill" />
         </BoxBanner>
 
         <Container className="box">

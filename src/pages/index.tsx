@@ -2,12 +2,10 @@ import { GetStaticProps } from "next";
 import * as prismic from "@prismicio/client";
 
 import getPrismicClient from "../services/prismic";
-import { Header } from "../components/Header";
 
 import { WrapperPosts } from "../components/WrapperPosts";
 import { useState } from "react";
 import { BoxBanner, Container } from "../components/HomePage/styles";
-import { Carousel } from "../components/Carousel";
 import { useGetPosts } from "../hooks/useGetPosts";
 import Head from "next/head";
 import Image from "next/image";
@@ -43,6 +41,7 @@ interface PostsFormatted {
 interface PostProps {
   posts: PostsFormatted[];
   next_page: null | string;
+  getPosts: (response: ResponseRequest) => any
 }
 
 interface ResponseRequest {
@@ -50,10 +49,16 @@ interface ResponseRequest {
   results: Post[];
 }
 
-export default function Home({ posts, next_page }: PostProps) {
+
+
+interface PostPagination {
+  next_page: string|null;
+  results: Post[];
+}
+export default function Home({ posts, next_page, getPosts }: PostProps) {
   const [listPosts, setListPosts] = useState(posts);
   const [nextPage, setNextPage] = useState(next_page);
-  async function getMorePosts() {
+  async function GetMorePosts() {
     const nextPosts = await fetch(`${nextPage}`);
 
     const nextPostsJSON = await nextPosts.json();
@@ -75,14 +80,14 @@ export default function Home({ posts, next_page }: PostProps) {
             que a cada post que o júnior ou sand ler, deixe ele um passo mais próximo de alcançar seus objetivos🤓.
           </p>
         </div>
-        <Image priority src="/images/banner.jpg" layout="fill" />
+        <Image priority src="/images/banner.jpg" alt="banner" layout="fill" />
       </BoxBanner>
       <Container className="box">
       
         <div className="content">
           <WrapperPosts posts={listPosts} />
           {nextPage && (
-            <h3 className="load-more" onClick={getMorePosts}>
+            <h3 className="load-more" onClick={GetMorePosts}>
               Carregar mais Posts
             </h3>
           )}
@@ -100,9 +105,28 @@ export const getStaticProps: GetStaticProps = async () => {
     pageSize: 10,
   });
 
-  const posts: PostsFormatted[] = useGetPosts(
-    response as unknown as ResponseRequest
-  );
+  function getPosts(response:PostPagination):PostsFormatted[] {
+    const postsFormatted = response.results.map(post => {
+      return {
+        slug: post.uid,
+        first_publication_date: new Date(post.first_publication_date).toLocaleDateString(
+          "pt-BR",
+          {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          }
+        ),
+          title: post.data.title[0].text,
+          subtitle: post.data.subtitle[0].text,
+          author: post.data.author[0].text,
+          bannerURL: post.data.banner.url
+        }
+    });
+    return postsFormatted;
+  }
+
+  const posts = getPosts(response as unknown as PostPagination);
 
   const next_page = response.next_page;
 
@@ -111,5 +135,6 @@ export const getStaticProps: GetStaticProps = async () => {
       posts,
       next_page,
     },
+    revalidate: 60 * 60 // 1hour
   };
 };

@@ -7,7 +7,7 @@ export function Header() {
     <Content>
       <Link href="/">
         <div className="wrapper-logo">
-          <Image src="/images/logo.svg" layout="fill" />
+          <Image src="/images/logo.svg" layout="fill" alt="logo"/>
         </div>
       </Link>
     </Content>

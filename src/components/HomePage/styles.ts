@@ -25,6 +25,8 @@ export const Container = styled.main`
       color: #3bcbde;
       cursor: pointer;
       transition: all 0.2s linear;
+      text-align: center;
+      margin-bottom: 3rem;
       &:hover {
         filter: brightness(1.3);
       }
@@ -36,7 +38,6 @@ export const BoxBanner = styled.div`
   animation: ${sizeView} 2s linear;
   margin: auto;
   height: 400px;
-  max-width:1440px;
   position: relative;
   img{
     object-fit: cover;
