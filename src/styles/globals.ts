@@ -45,8 +45,11 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0 auto;
       padding: 0 1.5rem;
     }
-
-    .utterances{
+    #comments{
+        padding: 0 1rem;
+        border-top: 1px solid #747474;
         max-width: 720px;
+        margin: 2rem auto;
     }
+
 `;

@@ -32,6 +32,10 @@ export const Container = styled.main`
         line-height: 1.2;
         margin: 2rem 0;
       }
+      a{
+        color: #3BCBDE;
+        text-decoration: underline;
+      }
       p,strong,span{
         font-size: 1.125rem;
         color: #bbb;
@@ -41,8 +45,10 @@ export const Container = styled.main`
         margin-bottom: 1rem;
         text-align: justify;
       }
+     
       strong{
         color: #3BCBDE;
+        text-align: start !important;
       }
       p img{
         text-align: center;
@@ -59,21 +65,19 @@ export const Container = styled.main`
 `;
 
 export const BoxBanner = styled.div`
-  max-width: 1440px;
   flex: 1;
   margin: auto;
   position: relative;
   padding-bottom: 30%;
-  img{
+  img {
     object-fit: cover;
   }
 `;
 
-
 export const BoxImage = styled.div`
   position: relative;
   margin: 2rem 0;
-  img{
+  img {
     width: 100%;
   }
 `;

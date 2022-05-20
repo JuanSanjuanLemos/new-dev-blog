@@ -2,15 +2,16 @@ import styled, { keyframes } from "styled-components";
 
 const sizeView = keyframes`
   0%{
-    opacity: 0;
+    opacity: 0.4;
   }
   50%{
-    opacity: 0.5;
-  }
-  100%{
     opacity: 1;
   }
+  100%{
+    opacity: 0.4;
+  }
 `;
+
 
 export const Container = styled.main`
   .banner {
@@ -36,19 +37,20 @@ export const Container = styled.main`
 
 export const BoxBanner = styled.div`
   animation: ${sizeView} 2s linear;
+  position: relative;
   margin: auto;
   height: 400px;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
   img{
     object-fit: cover;
+    animation: ${sizeView} infinite 5s linear;
   }
   .text{
     margin: 1rem;
     z-index: 3;
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translate(-50%,100%);
     margin: auto;
     h1{
       text-align: center;

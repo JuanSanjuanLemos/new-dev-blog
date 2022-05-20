@@ -102,7 +102,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const response = await client.get({
     predicates: prismic.predicate.at("document.type", "post"),
     fetch: ["publication.title"],
-    pageSize: 10,
+    pageSize: 6,
   });
 
   function getPosts(response:PostPagination):PostsFormatted[] {
@@ -135,6 +135,6 @@ export const getStaticProps: GetStaticProps = async () => {
       posts,
       next_page,
     },
-    revalidate: 60 // 1 minute
+    revalidate: 60 * 60 // 1 hour
   };
 };

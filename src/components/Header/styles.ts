@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 export const Content = styled.div`
   padding:2rem 0;
-  background-color: #040810;
-  border-bottom: 1px solid #747474;
+  background-color: #000;
+  max-width: 1440px;
   cursor: pointer;
+  margin: auto;
   .wrapper-logo{
     left: 50%;
     transform: translateX(-50%);

@@ -3,6 +3,11 @@ import styled from "styled-components";
 export const Container = styled.footer`
   background-color: #040810;
   border-top: 1px solid #747474;
+  position: relative;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
   .content {
     padding: 2rem;
     max-width: 1160px;

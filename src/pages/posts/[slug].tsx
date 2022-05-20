@@ -217,6 +217,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       prevPost: prevPost || null,
       nextPost: nextPost || null,
     },
-    revalidate: 60, //24 hours
+    revalidate: 60 * 60 * 24, //24 hours
   };
 };

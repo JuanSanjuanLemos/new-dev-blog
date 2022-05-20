@@ -3,7 +3,7 @@ import { Container } from "./styles";
 
 export function Footer() {
   return (
-    <Container className="box">
+    <Container>
       <div className="content">
         <Image src="/images/logo.svg" width="150" height="30" alt="" />
         <p>

@@ -1,11 +1,20 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
+
+const sizeView = keyframes`
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+`;
 
 export const Article = styled.article`
   border: 2px solid #333;
   padding: 1rem;
   border-radius: 10px;
-
+  animation: ${sizeView} 1s linear;
   background-color:#21212c;
   max-height: 320px;
   max-width: 400px;
