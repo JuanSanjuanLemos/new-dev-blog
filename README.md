@@ -1,5 +1,5 @@
 <p align='center'>
-  <img height="40" src='./files/logo.svg'>
+  <img height="40" src='./README/files/logo.svg'>
 </p>
 <br>
 <br>
@@ -17,13 +17,13 @@
 <br>
 <br>
 
-<img src='./files/home.png'>
+<img src='./README/files/home.png'>
 </br>
 </br>
-<p align="center"> <img src='./files/card-post.png'></p>
+<p align="center"> <img src='./README/files/card-post.png'></p>
 </br>
 
-<img src='./files/post.gif'>
+<img src='./README/files/post.gif'>
 
 <br>
 <br>
