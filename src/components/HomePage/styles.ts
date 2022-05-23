@@ -21,17 +21,6 @@ export const Container = styled.main`
   .content {
     max-width: 1160px;
     margin: auto;
-
-    .load-more {
-      color: #3bcbde;
-      cursor: pointer;
-      transition: all 0.2s linear;
-      text-align: center;
-      margin-bottom: 3rem;
-      &:hover {
-        filter: brightness(1.3);
-      }
-    }
   }
 `;
 

@@ -4,7 +4,7 @@ import * as prismic from "@prismicio/client";
 import getPrismicClient from "../services/prismic";
 
 import { WrapperPosts } from "../components/WrapperPosts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BoxBanner, Container } from "../components/HomePage/styles";
 import { useGetPosts } from "../hooks/useGetPosts";
 import Head from "next/head";
@@ -63,11 +63,24 @@ export default function Home({ posts, next_page, getPosts }: PostProps) {
 
     const nextPostsJSON = await nextPosts.json();
     setNextPage(nextPostsJSON.next_page);
-
     const morePost = useGetPosts(nextPostsJSON);
     setListPosts([...listPosts, ...morePost]);
   }
+  useEffect(()=>{
+    if(document.querySelector('#ward')){
+      const intersectionObserver = new IntersectionObserver((entries)=>{
+  
+        if(entries.some(entry => entry.isIntersecting)){
+          GetMorePosts();
+        }
+  
+      })
 
+      intersectionObserver.observe(document.querySelector('#ward')!);
+
+      return () => intersectionObserver.disconnect();
+    }
+  },[nextPage])
   return (
     <>
     <Head>
@@ -85,12 +98,8 @@ export default function Home({ posts, next_page, getPosts }: PostProps) {
       <Container className="box">
       
         <div className="content">
-          <WrapperPosts posts={listPosts} />
-          {nextPage && (
-            <h3 className="load-more" onClick={GetMorePosts}>
-              Carregar mais Posts
-            </h3>
-          )}
+          <WrapperPosts posts={listPosts} nextPage={nextPage&& nextPage}/>
+
         </div>
       </Container>
     </>

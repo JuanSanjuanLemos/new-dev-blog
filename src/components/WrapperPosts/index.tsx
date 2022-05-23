@@ -17,9 +17,10 @@ interface PostsFormatted {
 
 interface PostProps {
   posts: PostsFormatted[];
+  nextPage: string | null;
 }
 
-export function WrapperPosts({ posts }: PostProps) {
+export function WrapperPosts({ posts, nextPage }: PostProps) {
   return (
     <Container className="box">
       <div className="content">
@@ -52,6 +53,7 @@ export function WrapperPosts({ posts }: PostProps) {
           </Link>
         ))}
       </div>
+      {nextPage && <div id="ward" />}
     </Container>
   );
 }

@@ -17,7 +17,6 @@ export const Article = styled.article`
   animation: ${sizeView} 1s linear;
   background-color:#21212c;
   max-height: 320px;
-  max-width: 400px;
   margin: auto;
   display: flex;
   flex-direction: column;
