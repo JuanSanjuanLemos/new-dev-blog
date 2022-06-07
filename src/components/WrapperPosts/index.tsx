@@ -28,25 +28,29 @@ export function WrapperPosts({ posts, nextPage }: PostProps) {
           <Link key={post.slug} href={`/posts/${post.slug}`} passHref>
             <a>
               <SmallPost>
-                <Image src={`${post.bannerURL}`} height={200} width={250} alt='post imagem' />
-
-                <h1>{post.title}</h1>
-                <h2>
-                  {post.subtitle}
-                </h2>
-                <div>
-                  <h3>
-                    <span>
-                      <AiOutlineCalendar />
-                    </span>
-                    {post.first_publication_date}
-                  </h3>
-                  <h3>
-                    <span>
-                      <BsFillPersonFill />
-                    </span>
-                    {post.author}
-                  </h3>
+                <div className="wrapper-img">
+                  <Image src={`${post.bannerURL}`} layout="fill" alt='post imagem' />
+                </div>
+                
+                <div className="post-content">
+                  <h1>{post.title}</h1>
+                  <h2>
+                    {post.subtitle}
+                  </h2>
+                  <div>
+                    <h3>
+                      <span>
+                        <AiOutlineCalendar />
+                      </span>
+                      {post.first_publication_date}
+                    </h3>
+                    <h3>
+                      <span>
+                        <BsFillPersonFill />
+                      </span>
+                      {post.author}
+                    </h3>
+                  </div>
                 </div>
               </SmallPost>
             </a>

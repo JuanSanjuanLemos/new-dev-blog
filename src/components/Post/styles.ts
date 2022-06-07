@@ -44,6 +44,7 @@ export const Container = styled.main`
       p{
         margin-bottom: 1rem;
         text-align: justify;
+        padding-left: 1rem;
       }
      
       strong{
